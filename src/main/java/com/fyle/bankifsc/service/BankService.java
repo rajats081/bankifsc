@@ -14,24 +14,24 @@ public class BankService {
     @Autowired
     BankRepository repository;
 
-    public Bank createBank(Bank bank) {
+    public Bank createBankDetails(Bank bank) {
         return repository.save(bank);
     }
 
-    public Optional<Bank> getBankByIFSCCode(String IFSCCode) {
+    public Optional<Bank> getBankDetailsByIFSCCode(String IFSCCode) {
         return repository.findById(IFSCCode);
     }
 
     public Bank updateBankDetails(Bank bank) {
-        return createBank(bank);
+        return createBankDetails(bank);
     }
 
-    public boolean deleteBank(String id) {
+    public boolean deleteBankDetailsByIFSCCode(String id) {
         repository.deleteById(id);
-        return !getBankByIFSCCode(id).isPresent();
+        return !getBankDetailsByIFSCCode(id).isPresent();
     }
 
-    public List<Bank> getAllBanksByNameAndCity(String name, String city) {
+    public List<Bank> getAllBanksDetailsByNameAndCity(String name, String city) {
         return repository.findAll()
                 .stream()
                 .filter(bank -> bank.getName().equals(name)
