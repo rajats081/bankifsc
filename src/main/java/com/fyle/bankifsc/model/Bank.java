@@ -4,25 +4,26 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+
 @Entity
-@Table(name = "bankDetails")
+@Table(name = "bankdetail")
 public class Bank {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private final String IFSCCode;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private String IFSCCode;
 
     @NotNull
     @Column(name = "name")
-    private final String name;
+    private String name;
 
     @NotNull
     @Column(name = "city")
-    private final String city;
+    private String city;
 
     @NotNull
-    @Column(name = "contactNumber")
-    private final String contactNumber;
+    @Column(name = "contactnumber")
+    private String contactNumber;
 
     public Bank(String name, String IFSCCode, String city, String contactNumber) {
         this.name = name;
@@ -31,12 +32,24 @@ public class Bank {
         this.contactNumber = contactNumber;
     }
 
+    public Bank() {
+
+    }
+
+    public String getIFSCCode() {
+        return IFSCCode;
+    }
+
     public String getName() {
         return name;
     }
 
     public String getCity() {
         return city;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
     }
 
     @Override
