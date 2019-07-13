@@ -1,6 +1,0 @@
-CREATE TABLE bankdetail(
-   id BIGSERIAL PRIMARY KEY,
-   name VARCHAR (50) NOT NULL,
-   city VARCHAR (50) NOT NULL,
-   contactnumber VARCHAR (50) NOT NULL
-);

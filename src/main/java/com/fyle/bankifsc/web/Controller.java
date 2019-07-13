@@ -29,15 +29,23 @@ public class Controller {
     //create branch
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/branch")
-    public Branch createBankDetails(@RequestBody Branch branch) {
+    public Branch createBranchDetails(@RequestBody Branch branch) {
        return branchService.createBranchDetails(branch);
     }
     
     //Fetch by id
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/banks/{IFSCCode}")
-    public Bank getBankByIFSCCode(@PathVariable Integer  IFSCCode) {
+    public Bank getBankDetailsByIFSCCode(@PathVariable Integer IFSCCode) {
         return bankService.getBankDetailsByIFSCCode(IFSCCode);
+    }
+
+    //Fetch all banks by name and city
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/banks")
+    public List<Branch> getAllBranchDetailsNameAndCity(@RequestParam(name = "name") String name,
+                                                       @RequestParam(name = "city") String city) {
+        return branchService.getAllBranchDetailsByNameAndCity(name, city);
     }
 
     //Update bank details
@@ -47,15 +55,6 @@ public class Controller {
 	 * @PutMapping("/banks") public Bank updateBankDetails(@RequestBody Bank bank) {
 	 * return bankService.updateBankDetails(bank); }
 	 */
-    
-    
-    //Fetch all banks by name and city
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/banks")
-    public List<Branch> getAllBranchDetailsNameAndCity(@RequestParam(name = "name") String name,
-                                                    @RequestParam(name = "city") String city) {
-        return branchService.getAllBranchDetailsByNameandCity(name, city);
-    }
 
     //Remove bank by IFSC code
 	/*

@@ -13,8 +13,8 @@ public class Branch {
 	private int ifsc;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "bank_id")
-	private Bank bankId;
+	@JoinColumn(name = "id")
+	private Bank bank;
 
 	@NotNull
 	@Column(name = "branch")
@@ -36,15 +36,8 @@ public class Branch {
 	@Column(name = "state")
 	private String state;
 
-	public int getIfsc() {
-		return ifsc;
-	}
-
-	public Branch(int ifsc, @NotNull Bank bankId, @NotNull String branch, @NotNull String address, @NotNull String city,
-			@NotNull String district, @NotNull String state) {
-		super();
-		this.ifsc = ifsc;
-		this.bankId = bankId;
+	public Branch(Bank bank, String branch, String address, String city, String district, String state) {
+		this.bank = bank;
 		this.branch = branch;
 		this.address = address;
 		this.city = city;
@@ -53,19 +46,22 @@ public class Branch {
 	}
 
 	public Branch() {
+	}
 
+	public int getIfsc() {
+		return ifsc;
 	}
 
 	public void setIfsc(int ifsc) {
 		this.ifsc = ifsc;
 	}
 
-	public Bank getBankId() {
-		return bankId;
+	public Bank getBank() {
+		return bank;
 	}
 
-	public void setBankId(Bank bankId) {
-		this.bankId = bankId;
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 	public String getBranch() {
@@ -110,61 +106,21 @@ public class Branch {
 
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((bankId == null) ? 0 : bankId.hashCode());
-		result = prime * result + ((branch == null) ? 0 : branch.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((district == null) ? 0 : district.hashCode());
-		result = prime * result + ifsc;
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Branch branch1 = (Branch) o;
+		return getIfsc() == branch1.getIfsc() &&
+				Objects.equals(getBank(), branch1.getBank()) &&
+				Objects.equals(getBranch(), branch1.getBranch()) &&
+				Objects.equals(getAddress(), branch1.getAddress()) &&
+				Objects.equals(getCity(), branch1.getCity()) &&
+				Objects.equals(getDistrict(), branch1.getDistrict()) &&
+				Objects.equals(getState(), branch1.getState());
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Branch other = (Branch) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (bankId == null) {
-			if (other.bankId != null)
-				return false;
-		} else if (!bankId.equals(other.bankId))
-			return false;
-		if (branch == null) {
-			if (other.branch != null)
-				return false;
-		} else if (!branch.equals(other.branch))
-			return false;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (district == null) {
-			if (other.district != null)
-				return false;
-		} else if (!district.equals(other.district))
-			return false;
-		if (ifsc != other.ifsc)
-			return false;
-		if (state == null) {
-			if (other.state != null)
-				return false;
-		} else if (!state.equals(other.state))
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(getIfsc(), getBank(), getBranch(), getAddress(), getCity(), getDistrict(), getState());
 	}
-
 }

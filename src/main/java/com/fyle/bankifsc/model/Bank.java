@@ -17,14 +17,12 @@ public class Bank {
     @Column(name = "name")
     private String name;
     
-    public Bank(int id, @NotNull String name) {
-		super();
-		Id = id;
+    public Bank(int id, String name) {
+		this.Id = id;
 		this.name = name;
 	}
 
 	public Bank() {
-
     }
 
     public String getName() {
@@ -34,7 +32,6 @@ public class Bank {
     public int getId() {
         return Id;
     }
-
 
     @Override
     public boolean equals(Object o) {

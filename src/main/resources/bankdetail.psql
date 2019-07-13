@@ -1,23 +1,16 @@
-
 CREATE TABLE bank
 (
-    id bigint NOT NULL,
-    name character varying(49),
-    CONSTRAINT banks_id_pkey PRIMARY KEY (id)
+    id BIGSERIAL PRIMARY KEY,
+    name character varying(49)
 );
 
 CREATE TABLE branch
 (
-    ifsc character varying(11) NOT NULL,
-    bank_id bigint,
+    ifsc BIGSERIAL PRIMARY KEY,
+    bank_id BIGSERIAL FOREIGN KEY,
     branch character varying(74),
     address character varying(195),
     city character varying(50),
     district character varying(50),
     state character varying(26),
-    CONSTRAINT branches_ifsc_pkey PRIMARY KEY (ifsc),
-    CONSTRAINT branches_banks_fkey FOREIGN KEY (bank_id)
-        REFERENCES bank (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
 );

@@ -8,62 +8,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class BranchService {
-	@Autowired
-	BranchRepository branchRepository;
-	@Autowired
-	BranchRepository bankRepository;
+    @Autowired
+    BranchRepository branchRepository;
 
-	BankService bankService = new BankService();
+    @Autowired
+    BranchRepository bankRepository;
 
-	public Branch createBranchDetails(Branch branch) {
-		return branchRepository.save(branch);
-	}
+    BankService bankService = new BankService();
 
-	public Branch getBranchDetailsById(Integer ifsc) {
-		Optional<Branch> branch = null;
-		try {
-			branch = branchRepository.findById(ifsc);
-			return branch.get();
-		} catch (Exception ex) {
-			return null;
-		}
-	}
+    public Branch createBranchDetails(Branch branch) {
+        return branchRepository.save(branch);
+    }
 
-	
+    public Branch getBranchDetailsByIFSC(Integer ifsc) {
+        return branchRepository.findById(ifsc).get();
+    }
 
-	@SuppressWarnings("unlikely-arg-type")
-	public List<Branch> getAllBranchDetailsByNameandCity(String bankName, String city) {
-		Bank bank = null;
-		try {
-			bank = bankService.findByName(bankName);
-			int bankId = bank.getId();
-			return branchRepository.findAll().stream().filter(branch -> branch.getBankId().equals(bankId))
-					.collect(Collectors.toList());
+    public List<Branch> getAllBranchDetailsByNameAndCity(String bankName, String city) {
+        Bank bank = null;
+        bank = bankService.getBankDetailsByName(bankName);
+        int bankId = bank.getId();
 
-		} catch (Exception ex) {
-			return null;
-		}
-	}
+        return branchRepository.findAll()
+                .stream()
+                .filter(branch -> branch
+                        .getBank()
+                        .equals(bankId))
+                .collect(Collectors
+                        .toList());
+    }
 
-	public Branch updateBranchDetails(Branch branch) {
-		return createBranchDetails(branch);
-	}
+    /*
+    public boolean deleteBranchDetailsByIfsc(Integer ifsc) {
+        branchRepository.deleteById(ifsc);
+        return Objects.isNull(getBranchDetailsByIFSC(ifsc));
+    }
+    */
 
-	public boolean deleteBranchDetailsByIfsc(Integer ifsc) {
-		branchRepository.deleteById(ifsc);
-		return Objects.isNull(getBranchDetailsById(ifsc));
-	}
+     /*
+    public Branch updateBranchDetails(Branch branch) {
+        return createBranchDetails(branch);
+    }
+    */
 
-	/*
-	 * public List<Bank> getAllBanksDetailsByNameAndCity(String name, String city) {
-	 * return repository.findAll().stream().filter(bank ->
-	 * bank.getName().equals(name) && bank.getCity().equals(city))
-	 * .collect(Collectors.toList());
-	 */
+    /*
+     * public List<Bank> getAllBanksDetailsByNameAndCity(String name, String city) {
+     * return repository.findAll().stream().filter(bank ->
+     * bank.getName().equals(name) && bank.getCity().equals(city))
+     * .collect(Collectors.toList());
+     */
 }
