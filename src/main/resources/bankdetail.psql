@@ -1,16 +1,17 @@
 CREATE TABLE bank
 (
-    id BIGSERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name character varying(49)
 );
 
 CREATE TABLE branch
 (
     ifsc BIGSERIAL PRIMARY KEY,
-    bank_id BIGSERIAL FOREIGN KEY,
+    bankid INTEGER,
     branch character varying(74),
     address character varying(195),
     city character varying(50),
     district character varying(50),
     state character varying(26),
+    FOREIGN KEY (bankid) REFERENCES bank (id)
 );

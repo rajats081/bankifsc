@@ -13,7 +13,7 @@ public class Branch {
 	private int ifsc;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "bankid")
 	private Bank bank;
 
 	@NotNull
