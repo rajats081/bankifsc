@@ -6,51 +6,35 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "bankdetail")
+@Table(name = "bank")
 public class Bank {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer IFSCCode;
+    private int Id;
 
     @NotNull
     @Column(name = "name")
     private String name;
+    
+    public Bank(int id, @NotNull String name) {
+		super();
+		Id = id;
+		this.name = name;
+	}
 
-    @NotNull
-    @Column(name = "city")
-    private String city;
+	public Bank() {
 
-    @NotNull
-    @Column(name = "contactnumber")
-    private String contactNumber;
-
-    public Bank(String name, Integer IFSCCode, String city, String contactNumber) {
-        this.name = name;
-        this.IFSCCode = IFSCCode;
-        this.city = city;
-        this.contactNumber = contactNumber;
-    }
-
-    public Bank() {
-
-    }
-
-    public Integer getIFSCCode() {
-        return IFSCCode;
     }
 
     public String getName() {
         return name;
     }
-
-    public String getCity() {
-        return city;
+    
+    public int getId() {
+        return Id;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -58,13 +42,11 @@ public class Bank {
         if (o == null || getClass() != o.getClass()) return false;
         Bank bank = (Bank) o;
         return Objects.equals(name, bank.name) &&
-                Objects.equals(IFSCCode, bank.IFSCCode) &&
-                Objects.equals(city, bank.city) &&
-                Objects.equals(contactNumber, bank.contactNumber);
+                Objects.equals(Id, bank.Id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, IFSCCode, city, contactNumber);
+        return Objects.hash(Id, name);
     }
 }
