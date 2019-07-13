@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -18,17 +19,23 @@ public class BankService {
         return repository.save(bank);
     }
 
-    public Optional<Bank> getBankDetailsByIFSCCode(String IFSCCode) {
-        return repository.findById(IFSCCode);
+    public Bank getBankDetailsByIFSCCode(Integer IFSCCode) {
+        Optional<Bank> bank = null;
+        try {
+            bank = repository.findById(IFSCCode);
+            return bank.get();
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     public Bank updateBankDetails(Bank bank) {
         return createBankDetails(bank);
     }
 
-    public boolean deleteBankDetailsByIFSCCode(String id) {
+    public boolean deleteBankDetailsByIFSCCode(Integer id) {
         repository.deleteById(id);
-        return !getBankDetailsByIFSCCode(id).isPresent();
+        return Objects.isNull(getBankDetailsByIFSCCode(id));
     }
 
     public List<Bank> getAllBanksDetailsByNameAndCity(String name, String city) {

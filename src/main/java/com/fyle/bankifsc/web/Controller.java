@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class Controller {
@@ -24,10 +23,11 @@ public class Controller {
     //Fetch by id
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/banks/{IFSCCode}")
-    public Optional<Bank> getBankByIFSCCode(@PathVariable String IFSCCode) {
+    public Bank getBankByIFSCCode(@PathVariable Integer  IFSCCode) {
         return service.getBankDetailsByIFSCCode(IFSCCode);
     }
 
+    //Update bank details
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/banks")
     public Bank updateBankDetails(@RequestBody Bank bank) {
@@ -45,7 +45,7 @@ public class Controller {
     //Remove bank by IFSC code
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/banks/{IFSCCode}")
-    public Boolean deleteBankDetailsByIFSCCode(@PathVariable String IFSCCode) {
+    public Boolean deleteBankDetailsByIFSCCode(@PathVariable Integer IFSCCode) {
         return service.deleteBankDetailsByIFSCCode(IFSCCode);
     }
 }

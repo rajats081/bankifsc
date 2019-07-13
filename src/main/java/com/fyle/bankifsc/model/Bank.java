@@ -10,8 +10,8 @@ import java.util.Objects;
 public class Bank {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String IFSCCode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer IFSCCode;
 
     @NotNull
     @Column(name = "name")
@@ -25,7 +25,7 @@ public class Bank {
     @Column(name = "contactnumber")
     private String contactNumber;
 
-    public Bank(String name, String IFSCCode, String city, String contactNumber) {
+    public Bank(String name, Integer IFSCCode, String city, String contactNumber) {
         this.name = name;
         this.IFSCCode = IFSCCode;
         this.city = city;
@@ -36,7 +36,7 @@ public class Bank {
 
     }
 
-    public String getIFSCCode() {
+    public Integer getIFSCCode() {
         return IFSCCode;
     }
 
