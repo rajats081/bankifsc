@@ -104,7 +104,6 @@ public class Branch {
 		this.state = state;
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

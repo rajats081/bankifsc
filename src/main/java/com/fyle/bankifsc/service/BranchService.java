@@ -2,6 +2,7 @@ package com.fyle.bankifsc.service;
 
 import com.fyle.bankifsc.model.Bank;
 import com.fyle.bankifsc.model.Branch;
+import com.fyle.bankifsc.repository.BankRepository;
 import com.fyle.bankifsc.repository.BranchRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,6 @@ public class BranchService {
     @Autowired
     BranchRepository branchRepository;
 
-    @Autowired
-    BranchRepository bankRepository;
-
     BankService bankService = new BankService();
 
     public Branch createBranchDetails(Branch branch) {
@@ -29,9 +27,8 @@ public class BranchService {
     }
 
     public List<Branch> getAllBranchDetailsByNameAndCity(String bankName, String city) {
-        Bank bank = null;
-        bank = bankService.getBankDetailsByName(bankName);
-        int bankId = bank.getId();
+        int bankId = bankService.getBankDetailsByName(bankName)
+                .getId();
 
         return branchRepository.findAll()
                 .stream()
