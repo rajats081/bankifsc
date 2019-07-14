@@ -33,13 +33,20 @@ public class Controller {
        return branchService.createBranchDetails(branch);
     }
     
-    //Fetch by id
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/banks/{IFSCCode}")
-    public Bank getBankDetailsByIFSCCode(@PathVariable Integer IFSCCode) {
-        return bankService.getBankDetailsByIFSCCode(IFSCCode);
-    }
+//    //Fetch by id
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping("/banks/{IFSCCode}")
+//    public Bank getBankDetailsByIFSCCode(@PathVariable Integer IFSCCode) {
+//        return bankService.getBankDetailsByIFSCCode(IFSCCode);
+//    }
 
+  //Fetch by id
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/banks/{Id}")
+    public Bank getBankDetailsById(@PathVariable Integer Id) {
+        return bankService.getBankDetailsById(Id);
+    }
+    
     //Fetch all banks by name and city
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/banks")
@@ -48,6 +55,13 @@ public class Controller {
         return branchService.getAllBranchDetailsByNameAndCity(name, city);
     }
 
+    //Fetch branch by ifsc
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/branch/{IFSCCode}")
+    public Branch geBranchDetailsByIFSC(@PathVariable Integer IFSCCode) {
+        return branchService.getBranchDetailsByIFSC(IFSCCode);
+    }
+    
     //Update bank details
 	/*
 	 * @ResponseStatus(HttpStatus.OK)

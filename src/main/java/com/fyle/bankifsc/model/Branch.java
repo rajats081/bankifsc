@@ -12,7 +12,7 @@ public class Branch {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ifsc;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "bankid")
 	private Bank bank;
 

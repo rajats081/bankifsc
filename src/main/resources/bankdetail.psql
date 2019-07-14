@@ -7,7 +7,7 @@ CREATE TABLE bank
 CREATE TABLE branch
 (
     ifsc BIGSERIAL PRIMARY KEY,
-    bankid INTEGER,
+    bankid SERIAL,
     branch character varying(74),
     address character varying(195),
     city character varying(50),

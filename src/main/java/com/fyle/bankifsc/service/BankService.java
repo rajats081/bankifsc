@@ -35,11 +35,11 @@ public class BankService {
         return query.getSingleResult();
     }
 
-    /*
-    Bank getBankDetailsById(Integer Id) {
+    
+    public Bank getBankDetailsById(Integer Id) {
         return repository.findById(Id).get();
     }
-    */
+    
 
     /*
         Bank updateBankDetails(Bank bank) {
