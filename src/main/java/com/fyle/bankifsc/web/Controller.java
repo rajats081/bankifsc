@@ -13,26 +13,26 @@ import java.util.List;
 
 @RestController
 public class Controller {
-    @Autowired
-    BankService bankService;
-    
-    @Autowired
-    BranchService branchService;
-    
-    //Create bank
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/banks")
-    public Bank createBankDetails(@RequestBody Bank bank) {
-        return bankService.createBankDetails(bank);
-    }
-    
-    //create branch
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/branch")
-    public Branch createBranchDetails(@RequestBody Branch branch) {
-       return branchService.createBranchDetails(branch);
-    }
-    
+	@Autowired
+	BankService bankService;
+
+	@Autowired
+	BranchService branchService;
+
+	// Create bank
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping("/banks")
+	public Bank createBankDetails(@RequestBody Bank bank) {
+		return bankService.createBankDetails(bank);
+	}
+
+	// create branch
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping("/branch")
+	public Branch createBranchDetails(@RequestBody Branch branch) {
+		return branchService.createBranchDetails(branch);
+	}
+
 //    //Fetch by id
 //    @ResponseStatus(HttpStatus.OK)
 //    @GetMapping("/banks/{IFSCCode}")
@@ -40,29 +40,33 @@ public class Controller {
 //        return bankService.getBankDetailsByIFSCCode(IFSCCode);
 //    }
 
-  //Fetch by id
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/banks/{Id}")
-    public Bank getBankDetailsById(@PathVariable Integer Id) {
-        return bankService.getBankDetailsById(Id);
-    }
-    
-    //Fetch all banks by name and city
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/banks")
-    public List<Branch> getAllBranchDetailsNameAndCity(@RequestParam(name = "name") String name,
-                                                       @RequestParam(name = "city") String city) {
-        return branchService.getAllBranchDetailsByNameAndCity(name, city);
-    }
+	// Fetch by id
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/banks/{Id}")
+	public Bank getBankDetailsById(@PathVariable Integer Id) {
+		return bankService.getBankDetailsById(Id);
+	}
 
-    //Fetch branch by ifsc
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/branch/{IFSCCode}")
-    public Branch geBranchDetailsByIFSC(@PathVariable Integer IFSCCode) {
-        return branchService.getBranchDetailsByIFSC(IFSCCode);
-    }
-    
-    //Update bank details
+	// Fetch all banks by name and city
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/banks")
+	public List<Branch> getAllBranchDetailsNameAndCity(@RequestParam(name = "name") String name,
+			@RequestParam(name = "city") String city) {
+		System.out.println(name + " " + city);
+		return branchService.getAllBranchDetailsByNameAndCity(name, city);
+	}
+
+	/*
+	 * //Fetch branch by ifsc
+	 * 
+	 * @ResponseStatus(HttpStatus.OK)
+	 * 
+	 * @GetMapping("/branch/{IFSCCode}") public Branch
+	 * geBranchDetailsByIFSC(@PathVariable Integer IFSCCode) { return
+	 * branchService.getBranchDetailsByIFSC(IFSCCode); }
+	 */
+
+	// Update bank details
 	/*
 	 * @ResponseStatus(HttpStatus.OK)
 	 * 
@@ -70,7 +74,7 @@ public class Controller {
 	 * return bankService.updateBankDetails(bank); }
 	 */
 
-    //Remove bank by IFSC code
+	// Remove bank by IFSC code
 	/*
 	 * @ResponseStatus(HttpStatus.OK)
 	 * 
